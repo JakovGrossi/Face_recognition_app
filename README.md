@@ -14,6 +14,6 @@ Kod i pokretanje se nalaze u `main.py`, arhitektura u `recognizer.py`, baza u `d
 
 ### Glavne funkcije
 
-* **Registracija korisnika (1):** Nakon unosa imena, aplikacija vodi korisnika kroz proces snimanja 5 različitih poza glave (ravno, lijevo, desno, gore, dolje). Za svaku pozu se bilježe 64 validna okvira kako bi se osigurala visoka točnost i robusnost modela.
+* **Registracija korisnika (1):** Nakon unosa imena, aplikacija vodi korisnika kroz proces snimanja 5 različitih poza glave (ravno, lijevo, desno, gore, dolje). Za svaku pozu se bilježe 64 okvira.
 * **Prepoznavanje uživo (2):** Pokreće se video stream u stvarnom vremenu; aplikacija detektira lica, iscrtava bounding box i ispisuje ime prepoznate osobe uz postotak podudarnosti. Ukoliko prepoznato lice ne prelazi zadani prag, označava se kao *"Unknown"*.
-* **Brisanje korisnika (3):** Unosom imena pokreće se kaskadno brisanje, čime se iz baze trajno uklanjaju korisnički zapis, sve povezane slike i odgovarajući vektori značajki.
+* **Brisanje korisnika (3):** Unosom imena pokreće se kaskadno brisanje.
