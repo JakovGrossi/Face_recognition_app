@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*$py.class
+face_recognition.db
+venv/
+.env
+env/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

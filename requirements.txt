@@ -1,0 +1,10 @@
+streamlit
+tensorflow
+opencv-python
+facenet-pytorch
+torch
+Pillow
+numpy
+torchvision
+streamlit-webrtc
+av
