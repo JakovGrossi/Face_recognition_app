@@ -1,21 +1,20 @@
 # Face Recognition App
 
-Prvi projekt iz computer vision-a za prepoznavanje i registraciju lica u stvarnom vremenu preko web kamere. 
+Aplikacija za prepoznavanje i registraciju lica u stvarnom vremenu putem web kamere. Ovo je prvi projekt autora iz područja računalnog vida (Computer Vision).
 
-Kod i pokretanje se nalaze u `main.py`, arhitektura modela u `recognizer.py`, rad s bazom u `database.py`, a logika aplikacije u `actions.py`.
+Kod i pokretanje se nalaze u `main.py`, arhitektura modela u `recognizer.py`, rad s bazom podataka u `database.py`, dok je logički tijek aplikacije smješten u `actions.py`.
 
-## Kako aplikacija radi
-    * Detekcija i embedding: Model koristi MTCNN za lociranje lica i InceptionResnetV1 (vggface2) 
-      za izradu normaliziranih vektora iz `facenet-pytorch` paketa[cite: 1].
-    * Baza podataka: SQLite3 lokalno sprema ID korisnika, slike lica u JPEG 
-    formatu i njihove embeddinge u obliku BLOB podataka.
-    * Prepoznavanje: Usporedba lica se radi preko skalarnog produkta (dot product) između 
-    trenutnog kadra s kamere i embeddinga iz baze. Prag (threshold) za prepoznavanje je postavljen na 0.7.
+### Kako aplikacija radi
 
-## Glavne funkcije
-    * Registracija korisnika (1): Korisnik unosi ime, nakon čega aplikacija 
-    traži 5 poza glave (ravno, lijevo, desno, gore, dolje). Za svaku pozu se sprema po 64 validna okvira radi veće robusnosti.
-    * Prepoznavanje uživo (2): Otvara se video stream, aplikacija detektira lica, crta pravokutnik 
-    i ispisuje ime prepoznate osobe uz postotak sličnosti. Ako je rezultat ispod praga, lice se označava kao "Unknown".
-    * Brisanje korisnika (3): Unosom imena briše se korisnik iz tablice te se kaskadno 
-    uklanjaju svi njegovi povezani kadrice i vektori iz baze.
+* 
+**Detekcija i embedding:** Model koristi **MTCNN** za lociranje lica, dok **InceptionResnetV1 (vggface2)** iz `facenet-pytorch` paketa generira normalizirane vektore značajki lica.
+
+
+* **Baza podataka:** Sustav koristi **SQLite3** za lokalnu pohranu korisničkih podataka, pri čemu se slike lica spremaju u JPEG formatu, a pripadajući vektorski zapisi (embeddings) kao BLOB objekti.
+* **Prepoznavanje:** Proces prepoznavanja temelji se na izračunu **skalarnog produkta (dot product)** između vektora lica u trenutnom kadru i onih pohranjenih u bazi. Prag pouzdanosti (threshold) definiran je na vrijednosti **0.7**.
+
+### Glavne funkcije
+
+* **Registracija korisnika (1):** Nakon unosa imena, aplikacija vodi korisnika kroz proces snimanja 5 različitih poza glave (ravno, lijevo, desno, gore, dolje). Za svaku pozu se bilježe 64 validna okvira kako bi se osigurala visoka točnost i robusnost modela.
+* **Prepoznavanje uživo (2):** Pokreće se video stream u stvarnom vremenu; aplikacija detektira lica, iscrtava bounding box i ispisuje ime prepoznate osobe uz postotak podudarnosti. Ukoliko prepoznato lice ne prelazi zadani prag, označava se kao *"Unknown"*.
+* **Brisanje korisnika (3):** Unosom imena pokreće se kaskadno brisanje, čime se iz baze trajno uklanjaju korisnički zapis, sve povezane slike i odgovarajući vektori značajki.
